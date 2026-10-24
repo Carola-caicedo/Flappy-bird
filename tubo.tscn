@@ -1,14 +1,16 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cao0vt8cscqha"]
 
-[ext_resource type="Texture2D" path="res://assets/tubo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dxifu2rv5deqe" path="res://assets/tubo.png" id="1"]
+[ext_resource type="Script" uid="uid://bir7puy851yqp" path="res://tubo.gd" id="1_78x4u"]
 
 [sub_resource type="RectangleShape2D" id="Forma"]
 size = Vector2(56, 64)
 
-[node name="Tubo" type="Area2D" groups=["enemigos"]]
+[node name="Tubo" type="Area2D" unique_id=742746064 groups=["enemigos"]]
+script = ExtResource("1_78x4u")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=586673599]
 texture = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1631767067]
 shape = SubResource("Forma")
