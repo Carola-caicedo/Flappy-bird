@@ -1,6 +1,4 @@
 extends "res://bloques.gd"
-# Base del Taller 4. construir() arma el nivel a partir del MAPA:
-# "#" bloque, "." moneda, "o" pluma, "|" tubo.
 
 const MAPA = [
 	"################################################################",
