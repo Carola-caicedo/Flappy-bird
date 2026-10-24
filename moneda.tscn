@@ -1,14 +1,16 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://oajd631j4jqj"]
 
-[ext_resource type="Texture2D" path="res://assets/moneda.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://clpkdf2vqqibb" path="res://assets/moneda.png" id="1"]
+[ext_resource type="Script" uid="uid://bqi2q0nd3e6lk" path="res://moneda.gd" id="1_r4iok"]
 
 [sub_resource type="CircleShape2D" id="Forma"]
-radius = 12
+radius = 12.0
 
-[node name="Moneda" type="Area2D" groups=["monedas"]]
+[node name="Moneda" type="Area2D" unique_id=1672856662 groups=["monedas"]]
+script = ExtResource("1_r4iok")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1231651361]
 texture = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1290857897]
 shape = SubResource("Forma")
