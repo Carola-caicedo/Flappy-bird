@@ -19,9 +19,34 @@ var moneda_escena = preload("res://moneda.tscn")
 var pluma_escena = preload("res://pluma.tscn")
 var tubo_escena = preload("res://tubo.tscn")
 
+var puntaje = 0
+var modo_poder = false
+
 
 func _ready():
 	construir()
+	for item in get_tree().get_nodes_in_group("monedas"):
+		item.recogido.connect(_on_recogido)
+
+
+func _on_recogido(valor, da_poder):
+	puntaje += valor
+	$HUD/Puntaje.text = "Puntaje: %d" % puntaje
+	
+	if da_poder:
+		activar_poder()
+	
+	# Verificación de victoria con conteo del grupo
+	if get_tree().get_nodes_in_group("monedas").size() == 0:
+		$HUD/Mensaje.text = "¡Pasaste todos los huecos!"
+
+
+func activar_poder():
+	modo_poder = true
+	print("poder: sí")
+	await get_tree().create_timer(5.0).timeout
+	modo_poder = false
+	print("poder: no")
 
 
 func construir():
