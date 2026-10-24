@@ -9,6 +9,7 @@ radius = 14.0
 [node name="Pluma" type="Area2D" unique_id=180752177 groups=["monedas"]]
 script = ExtResource("1_cp4a8")
 valor = 5
+da_poder = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1790768983]
 texture = ExtResource("1")
