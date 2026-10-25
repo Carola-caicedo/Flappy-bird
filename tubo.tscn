@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qbwjgbolw7ep"]
 
-[ext_resource type="Texture2D" uid="uid://dxifu2rv5deqe" path="res://assets/tubo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://3w8thj814efk" path="res://assets/tubo.png" id="1"]
 [ext_resource type="Script" uid="uid://bir7puy851yqp" path="res://tubo.gd" id="1_78x4u"]
 
 [sub_resource type="RectangleShape2D" id="Forma"]

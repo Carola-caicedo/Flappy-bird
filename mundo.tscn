@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ong4mbngjfxo" path="res://mundo.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dudu47tvdgea4" path="res://jugador.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://mkt28mo14vwn" path="res://assets/mountains-bg.jpg" id="3_fw4w5"]
 
 [node name="Mundo" type="Node2D" unique_id=195197484]
 script = ExtResource("1")
@@ -31,3 +32,11 @@ theme_override_font_sizes/font_size = 36
 [node name="TimerPoder" type="Timer" parent="." unique_id=1099648262]
 wait_time = 5.0
 one_shot = true
+
+[node name="Fondo" type="CanvasLayer" parent="." unique_id=19551100]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Fondo" unique_id=1584665469]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_fw4w5")

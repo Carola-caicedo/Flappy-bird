@@ -40,8 +40,31 @@ func _ready():
 	# Conexión del Timer de poder
 	timer_poder.timeout.connect(_on_timer_poder_timeout)
 	
+	# Conexion de señales de piso y techo
+	jugador.choco_con_bloque.connect(_on_paredes_toco)
+	
 	actualizar_hud()
 
+
+func _on_paredes_toco():
+	if jugador.muriendo or juego_terminado:
+		return
+	
+	if modo_poder:
+		return
+	
+	# 3. Sin poder:
+	vidas -= 1
+	actualizar_hud()
+	
+	if vidas <= 0:
+		juego_terminado = true
+		$HUD/Mensaje.text = "Perdiste"
+		jugador.set_physics_process(false)
+		jugador.morir()
+	else:
+		jugador.morir()
+	
 
 func _on_recogido(valor, da_poder):
 	puntaje += valor
@@ -57,13 +80,25 @@ func _on_recogido(valor, da_poder):
 func activar_poder():
 	modo_poder = true
 	print("poder: sí")
+	
+	# Pone los tubos semi-transparentes
+	cambiar_transparencia_tubos(true)
+	
 	# El Timer reinicia la cuenta regresiva desde 0 al volver a llamar a start()
 	timer_poder.start(5.0)
+
+func cambiar_transparencia_tubos(transparente: bool):
+	# 0.4 de alfa (40% opacidad) al tener poder, 1.0 (100% opacidad) al terminar
+	var alfa = 0.4 if transparente else 1.0
+	for enemigo in get_tree().get_nodes_in_group("enemigos"):
+		enemigo.modulate.a = alfa
 
 
 func _on_timer_poder_timeout():
 	modo_poder = false
 	print("poder: no")
+	# Restaura la transparencia de los tubos
+	cambiar_transparencia_tubos(false)
 
 
 func _on_enemigo_toco(_enemigo):

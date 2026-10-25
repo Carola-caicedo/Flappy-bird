@@ -12,6 +12,9 @@ var muriendo = false
 @onready var sonido_aleteo = $Aleteo
 @onready var sonido_golpe = $Golpe
 
+#avisa al entorno que choco contra algo
+signal choco_con_bloque
+
 
 func _ready():
 	inicio = position
@@ -23,8 +26,9 @@ func _physics_process(delta):
 	mover(delta)
 	if Input.is_action_just_pressed("aletear"):
 		sonido_aleteo.play()   # cada aleteo es un sonido nuevo: aquí sí se reinicia
-	if is_on_floor():
-		morir()
+	if get_slide_collision_count() > 0:
+		choco_con_bloque.emit()
+		
 		return
 	actualizar_animacion()
 	inclinar()
