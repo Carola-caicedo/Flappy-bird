@@ -40,8 +40,31 @@ func _ready():
 	# Conexión del Timer de poder
 	timer_poder.timeout.connect(_on_timer_poder_timeout)
 	
+	# Conexion de señales de piso y techo
+	jugador.choco_con_bloque.connect(_on_paredes_toco)
+	
 	actualizar_hud()
 
+
+func _on_paredes_toco():
+	if jugador.muriendo or juego_terminado:
+		return
+	
+	if modo_poder:
+		return
+	
+	# 3. Sin poder:
+	vidas -= 1
+	actualizar_hud()
+	
+	if vidas <= 0:
+		juego_terminado = true
+		$HUD/Mensaje.text = "Perdiste"
+		jugador.set_physics_process(false)
+		jugador.morir()
+	else:
+		jugador.morir()
+	
 
 func _on_recogido(valor, da_poder):
 	puntaje += valor
