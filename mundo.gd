@@ -80,13 +80,25 @@ func _on_recogido(valor, da_poder):
 func activar_poder():
 	modo_poder = true
 	print("poder: sí")
+	
+	# Pone los tubos semi-transparentes
+	cambiar_transparencia_tubos(true)
+	
 	# El Timer reinicia la cuenta regresiva desde 0 al volver a llamar a start()
 	timer_poder.start(5.0)
+
+func cambiar_transparencia_tubos(transparente: bool):
+	# 0.4 de alfa (40% opacidad) al tener poder, 1.0 (100% opacidad) al terminar
+	var alfa = 0.4 if transparente else 1.0
+	for enemigo in get_tree().get_nodes_in_group("enemigos"):
+		enemigo.modulate.a = alfa
 
 
 func _on_timer_poder_timeout():
 	modo_poder = false
 	print("poder: no")
+	# Restaura la transparencia de los tubos
+	cambiar_transparencia_tubos(false)
 
 
 func _on_enemigo_toco(_enemigo):
